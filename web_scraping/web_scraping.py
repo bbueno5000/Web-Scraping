@@ -1,8 +1,27 @@
+"""
+DOCSTRING
+"""
 import bs4
-import urllib.request
+import urllib.request as request
 
-url = 'https://pythonprogramming.net/parsememcparseface/'
-source = urllib.request.urlopen(url).read()
-soup = bs4.BeautifulSoup(source, 'lxml')
-for url in soup.find_all('a'):
-    print(url.get('href'))
+URL = 'https://pythonprogramming.net/parsememcparseface/'
+SOURCE = request.urlopen(URL).read()
+SOUP = bs4.BeautifulSoup(SOURCE, 'lxml')
+
+def navigating_tags():
+    """
+    DOCSTRING
+    """
+    nav = SOUP.nav
+    for url in nav.find_all('a'):
+        print(url.get('href'))
+    print('######################################')
+    body = SOUP.body
+    for paragraph in body.find_all('p'):
+        print(paragraph.text)
+    print('######################################')
+    for div in SOUP.find_all('div', class_='body'):
+        print(div.text)
+
+if __name__ == '__main__':
+    navigating_tags()
